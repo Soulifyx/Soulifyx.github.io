@@ -1,6 +1,6 @@
 # Tutorial
 
-This is a tutorial on how to create the stacked and grouped bar chart using D3. The tools needed are as follows:
+This is a tutorial on how to create a stacked and grouped bar chart using D3. The tools needed are as follows:
 
 - D3 (either downloaded file or refer the D3 link in your file)
 - A webserver (Apache / Xampp / Python / etc.)
