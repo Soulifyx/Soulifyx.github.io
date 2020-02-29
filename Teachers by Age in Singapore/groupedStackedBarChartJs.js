@@ -66,7 +66,7 @@ d3.csv("teachers-in-schools-age.csv").then(function(dataset){
 		var year = [... new Set(dataset.map(function(d) {return d.year;}))]
 		var ageGroups = [... new Set(data.map(function(d) { return d.age; }))];
 		var sex = [... new Set(data.map(function(d) { return d.sex; }))];
-		var level = [... new Set(data.map(function(d) { return d.level_of_school; }))];
+		var level = [... new Set(data.map(function(d) { return d.level_of_school; }))].sort(d3.ascending);
 
 		var options = d3.select("#year")
 			.selectAll("option")
