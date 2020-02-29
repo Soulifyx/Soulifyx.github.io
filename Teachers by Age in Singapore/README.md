@@ -58,7 +58,7 @@ To create the bar chart, the process is split into multiple parts:
 3. Create D3 bar chart elements according to the data
 4. Create legends
 
-### Initialisation
+### 1. Initialisation
 
 ```javascript
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -160,7 +160,7 @@ var svg = d3.select("#chart").append("svg")
 
 The canvas for the chart. `svg` is commonly used for graphs and charts because of its versatility in that department. It is not comprised of pixels unlike other file formats. Instead, it has vectors which is perfect for displaying graphs and charts since they are not as complex as photographic images, thus giving as the ability to zoom in on a chart or graph without losing quality (or become "pixelated"). `g` is a HTML DOM grouping element to group other multiple elements into one.
 
-### Read and Process the Data
+### 2. Read and Process the Data
 
 ```javascript
 d3.csv("teachers-in-schools-age.csv").then(function(dataset){ //reads the dataset
@@ -305,7 +305,7 @@ var groupedData = d3.nest()
 
 Similar to when we search for the maximum number of teachers, this time the grouping is done by sex and age only. After that the grouped data will be converted to stacks of level of school.
 
-### Create D3 bar chart elements
+### 3. Create D3 bar chart elements
 
 ```javascript
 var tooltip = d3.select('#chart')
@@ -488,7 +488,12 @@ svg.selectAll(".barParent").remove();
 	    		else if(d.data.Sex == "F")
 	    			return female(key);
 	    	})
-	    	.on("mouseover", function(d){
+```
+
+`barParent` functions as the parent for all the bars along the x axis, which has a main purpose of hiding the bars before transitioning and showing them altogether during animation. Remember that `stackData` consists of stacked data according to level of schools, so 3 `g` element will be appended to the `barParent`, which is the number of the levels. Inside each `g` element will have 16 rectangles appended. 16 signifies the number of data grouped by level of school. In short, the process is creating and appending 16 bars into a stack and there are 3 stacks existing (again, there are 3 `g` which is the number of levels). 
+
+```javascript
+		.on("mouseover", function(d){
 	    		var key = d3.select(this.parentNode).attr("level");
 	    		var gender = "";
 	    		tooltip.select(".label").html(key + " SCHOOL");
@@ -511,7 +516,7 @@ svg.selectAll(".barParent").remove();
 	    	});
 ```
 
-`barParent` functions as the parent for all the bars along the x axis, which has a main purpose of hiding the bars before transitioning and showing them altogether during animation. Remember that `stackData` consists of stacked data according to level of schools, so 3 `g` element will be appended to the `barParent`, which is the number of the levels. Inside each `g` element will have 16 rectangles appended. 16 signifies the number of data grouped by level of school. In short, the process is creating and appending 16 bars into a stack and there are 3 stacks existing (again, there are 3 `g` which is the number of levels). The mouse events are to enable and disable tooltip when a specific mouse event is triggered.
+The mouse events are to enable and disable tooltip when a specific mouse event is triggered. Also, when the cursor hovers over a layer of bar, it will turn gray to better indicate which layer the user is selecting.
 
 ```javascript
 barParent
@@ -523,7 +528,7 @@ barParent
 
 Last but not least, after all the bars have been created and make a whole chart, an animation is played to make the bars rise from bottom to top.
 
-### Create Legends
+### 4. Create Legends
 
 ```javascript
 svg.selectAll(".legend").remove();
@@ -656,6 +661,8 @@ legendFemale.append('text')
 		.text(function(d) {
 			return d + " SCHOOL";
 		});
+	}
+});
 ```
 
 To finish the process, texts are needed to tell the user that each row of the rectangular symbols represents a level of school.
