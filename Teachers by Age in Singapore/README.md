@@ -273,7 +273,7 @@ function update(year){ //year input from year selection box
 		female.domain(level);
 ```
 
-Each time the year in selection box changes, the update function is called thus rendering a new chart. In the beginning of update function, mappings of the data are done for each category / column from the dataset so they can be used as a domain input for each respective scale.
+Each time the year in selection box changes, the update function is called thus rendering a new chart. In the beginning of update function, mappings of the data are done for each category / column from the dataset so they can be used as a domain input for each respective scale. `remove()` function is used so that everytime the update function is called (when the input year changes), the previous chart elements are removed so the new and previous chart will not be on top of the other. 
 
 ```javascript
 var options = d3.select("#year")
