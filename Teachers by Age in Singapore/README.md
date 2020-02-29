@@ -247,7 +247,7 @@ var groupedDatas = d3.nest()
 		.nice();
 ```
 
-In this part we try to obtain the maximum sum of teachers from all 3 level of schools grouped by year, age and sex. Then the value is set to be the ceiling for the y axis. For example, if the maximum value is 19,000 across all rows then the y axis scale will be from 0 to 19,000.
+In this part we try to obtain the maximum sum of teachers from all 3 level of schools grouped by year, age and sex. Then the value is set to be the ceiling for the y axis. For example, if the maximum value is 19,000 across all rows then the y axis scale will be from 0 to 19,000 (not exactly 19,000 but rounded to the next band).
 
 ```javascript
 var select = d3.select("#year")
