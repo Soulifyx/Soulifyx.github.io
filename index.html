@@ -1,0 +1,33 @@
+<head>
+	<meta charset="utf-8">
+	<title>Principal in Singapore Schools by Age</title>
+	<style>
+		.tooltip {
+			background: #eee;
+			box-shadow: 0 0 5px #999999;
+			color: #333;
+			display: block;
+			font-size: 14px;
+			left: 130px;
+			padding: 10px;
+			position: absolute;
+			text-align: center;
+			top: 95px;
+			width: 120px;
+			z-index: 10;
+			opacity:0;
+		}
+		#selectYear {
+			margin-left: 390px;
+		}
+	</style>
+<head>
+<body>
+	<h1> Principals in Singapore Schools by Age</h1>
+	<div id="chart"></div>
+	<script src="d3.v5.min.js"></script>
+	<script src="groupedStackedBarChartJs.js"></script>
+	<div id="selectYear">
+		Year: <select id="year"></select>
+	</div>
+</body>
