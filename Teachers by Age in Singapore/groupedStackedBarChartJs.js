@@ -144,7 +144,7 @@ d3.csv("teachers-in-schools-age.csv").then(function(dataset){
 	   		.attr("width", width)
 	   		.attr("y", height);
 
-	    var stackBar = barParent.selectAll("barParent")
+	    var stackBar = barParent.selectAll("g")
 	    	.data(stackData)
 	    	.enter()
 	    	.append("g")
