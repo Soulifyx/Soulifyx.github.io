@@ -247,7 +247,7 @@ var groupedDatas = d3.nest()
 		.nice();
 ```
 
-In this part we try to obtain the maximum sum of teachers from all 3 level of schools grouped by year, age and sex. Then the value is set to be the ceiling for the y axis. For example, if the maximum value is 19,000 across all rows then the y axis scale will be from 0 to 19,000 (not exactly 19,000 but rounded to the next tick).
+In this part we try to obtain the maximum sum of teachers from all 3 level of schools grouped by year, age and sex. Then the value is set to be the ceiling for the y axis. For example, if the maximum value is 19,000 across all rows then the y axis scale will be from 0 to 19,000 (not exactly 19,000 but rounded to the next tick). `nice()` function shows the value label of the last tick.
 
 ```javascript
 var select = d3.select("#year")
@@ -273,7 +273,7 @@ function update(year){ //year input from year selection box
 		female.domain(level);
 ```
 
-Each time the year in selection box changes, the update function is called thus rendering a new chart. Mappings of the data are done for each category / column from the dataset so they can be used as a domain input for each respective scale.
+Each time the year in selection box changes, the update function is called thus rendering a new chart. In the beginning of update function, mappings of the data are done for each category / column from the dataset so they can be used as a domain input for each respective scale.
 
 ```javascript
 var options = d3.select("#year")
@@ -284,7 +284,7 @@ var options = d3.select("#year")
 			.text(function(d) {return d;});
 ```
 
-Map all the distinct years from the data into options for the selection box.
+Map all the distinct years from the data into options for the selection box. `data(year)` is for binding / joining the data to the `option` DOM element and `enter()` returns an array with length of distinct years not binded to any `option` element yet. In this case, the year ranges from 1996 to 2018 and there is 0 `option` existing so the `enter()` function returns an array with the length of 23 not yet binded to an `option` element. Essentially, in this step we are appending year `option` as many as the distinct years.
 
 ```javascript
 var groupedData = d3.nest()
@@ -303,7 +303,7 @@ var groupedData = d3.nest()
 		var stackData = stack.keys(level)(groupedData);
 ```
 
-Similar to when we search for the maximum number of teachers, this time the grouping is done by sex and age only. After that the grouped data will be converted to stacks of level of school.
+Similar to when we searched for the maximum number of teachers, this time the grouping is done by sex and age only. After that the grouped data will be converted to stacks of level of school.
 
 ### 3. Create D3 bar chart elements
 
@@ -452,7 +452,7 @@ svg.selectAll(".xAxis").remove();
 	      	.text("No. of teachers");
 ```
 
-X and Y axes are then created including the label for each axis.
+X and Y axes are then displayed including the label for each axis.
 
 ```javascript
 svg.selectAll(".barParent").remove();
@@ -463,7 +463,7 @@ svg.selectAll(".barParent").remove();
 	   		.attr("width", width)
 	   		.attr("y", height);
 
-	    var stackBar = barParent.selectAll("barParent")
+	    var stackBar = barParent.selectAll("g")
 	    	.data(stackData)
 	    	.enter()
 	    	.append("g")
@@ -490,7 +490,7 @@ svg.selectAll(".barParent").remove();
 	    	})
 ```
 
-`barParent` functions as the parent for all the bars along the x axis, which has a main purpose of hiding the bars before transitioning and showing them altogether during animation. Remember that `stackData` consists of stacked data according to level of schools, so 3 `g` element will be appended to the `barParent`, which is the number of the levels. Inside each `g` element will have 16 rectangles appended. 16 signifies the number of data grouped by level of school. In short, the process is creating and appending 16 bars into a stack and there are 3 stacks existing (again, there are 3 `g` which is the number of levels). 
+`barParent` functions as the parent for all the bars along the x axis, which has a main purpose of hiding the bars before transitioning and showing them altogether during animation. Remember that `stackData` consists of stacked data according to level of schools, so 3 `g` elements, which is the number of the levels, will be appended to the `barParent`. Inside each `g` element will have 16 rectangles appended. 16 signifies the number of data grouped by level of school. In short, the process is creating and appending 16 bars into a stack and there are 3 stacks existing (again, there are 3 `g` which is the number of levels). Since we want to differentiate male and female bars, a checking is performed to ensure the bar `fill` has the correct set of colors.
 
 ```javascript
 		.on("mouseover", function(d){
@@ -516,7 +516,7 @@ svg.selectAll(".barParent").remove();
 	    	});
 ```
 
-The mouse events are to enable and disable tooltip when a specific mouse event is triggered. Also, when the cursor hovers over a layer of bar, it will turn gray to better indicate which layer the user is selecting.
+The mouse events are to enable and disable tooltip when a specific mouse event is triggered. Also, when the cursor hovers over one of the layers of a bar stack, it will turn gray to better indicate which layer the user is selecting. `mousemove` event enables the tooltip to follow wherever the cursor goes.
 
 ```javascript
 barParent
@@ -652,7 +652,7 @@ var legendMale = legend
 		.style('stroke', female);
 ```
 
-Rectangles acting as symbols for the legends are made here for both sex. Depending on the number of stacks (or level of schools), each rectangle position is calculated accordingly.
+Rectangles acting as symbols for the legends are made here for both sex. Depending on the number of layers (or level of schools), each rectangle position is calculated accordingly.
 
 ```javascript
 legendFemale.append('text')
@@ -665,4 +665,4 @@ legendFemale.append('text')
 });
 ```
 
-To finish the process, texts are needed to tell the user that each row of the rectangular symbols represents a level of school.
+To finish the entire process, texts are needed to tell the user that each row of the rectangular symbols represents a level of school.
