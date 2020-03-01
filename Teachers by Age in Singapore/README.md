@@ -225,7 +225,7 @@ d3.csv("teachers-in-schools-age.csv").then(function(dataset){ //reads the datase
 		var stackData = stack.keys(level)(groupedData);
 ```
 
-This section is important because we have to process and reorganise the data in a way that it will not bring unnecessary difficulty when going through the processed data in order to display them into a graph.
+This section is important because we have to process and reorganise the data in a way that it will not bring unnecessary difficulty when going through the processed data in order to display them into a graph. Since we are going to make a stacked bar chart, in this whole process we are mainly trying to read the data, set the scales domain according to the data, and  arrange the data into an easily readable stacked arrays of data.
 
 ```javascript
 var groupedDatas = d3.nest()
@@ -273,7 +273,7 @@ function update(year){ //year input from year selection box
 		female.domain(level);
 ```
 
-Each time the year in selection box changes, the update function is called thus rendering a new chart. In the beginning of update function, mappings of the data are done for each category / column from the dataset so they can be used as a domain input for each respective scale. `remove()` function is used so that everytime the update function is called (when the input year changes), the previous chart elements are removed so the new and previous chart will not be on top of the other. 
+Each time the year in selection box changes, the update function is called thus rendering a new chart. In the beginning of update function, mappings of the data are done for each category / column from the dataset so they can be used as a domain input for each respective scale. `remove()` function is used so that everytime the update function is called (when the input year changes), the previous chart elements are removed so the new and previous chart will not be on top of the other. `[... new Set()]` is used to get distinct values of the array.
 
 ```javascript
 var options = d3.select("#year")
@@ -421,7 +421,7 @@ var tooltip = d3.select('#chart')
 					.attr('class', 'total');
 ```
 
-Tooltip element that will display 3 pieces of information, which are level of school, teachers count and total teachers across all levels.
+A tooltip element that will display 3 pieces of information, which are level of school, teachers count and total teachers across all levels.
 
 ```javascript
 svg.selectAll(".xAxis").remove();
@@ -452,7 +452,7 @@ svg.selectAll(".xAxis").remove();
 	      	.text("No. of teachers");
 ```
 
-X and Y axes are then displayed including the label for each axis.
+X and Y axes are then displayed by using `.call()` function while also creating the label for each axis.
 
 ```javascript
 svg.selectAll(".barParent").remove();
@@ -490,7 +490,7 @@ svg.selectAll(".barParent").remove();
 	    	})
 ```
 
-`barParent` functions as the parent for all the bars along the x axis, which has a main purpose of hiding the bars before transitioning and showing them altogether during animation. Remember that `stackData` consists of stacked data according to level of schools, so 3 `g` elements, which is the number of the levels, will be appended to the `barParent`. Inside each `g` element will have 16 rectangles appended. 16 signifies the number of data grouped by level of school. In short, the process is creating and appending 16 bars into a stack and there are 3 stacks existing (again, there are 3 `g` which is the number of levels). Since we want to differentiate male and female bars, a checking is performed to ensure the bar `fill` has the correct set of colors.
+`barParent` functions as the parent for all the bars along the x axis, which has a main purpose of hiding the bars before transitioning and showing them altogether during animation. Remember that `stackData` consists of stacked data according to level of schools, so 3 `g` elements, which is the number of the levels, will be appended to the `barParent`. Inside each `g` element 16 rectangles are appended. 16 signifies the number of data grouped by level of school. In short, the process is creating and appending 16 bars into a stack and there are 3 stacks existing (again, there are 3 `g` which is the number of levels). Since we want to differentiate male and female bars, a checking is performed to ensure the bar `fill` has the correct set of colors.
 
 ```javascript
 		.on("mouseover", function(d){
