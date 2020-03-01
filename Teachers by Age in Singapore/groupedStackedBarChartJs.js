@@ -19,10 +19,11 @@ var y0 = d3.scaleLinear()
 		.rangeRound([height,0]);
 
 var male = d3.scaleOrdinal()
-		.range(["#99ffff", "#00e6e6", "#006666"]);
+		//.range(["#99ffff", "#00e6e6", "#006666"]);
+		.range(["#00ffff", "#00ccff", "#0099ff"]);
 
 var female = d3.scaleOrdinal()
-		.range(["#ffb3d9", "#ff42a6", "#b30059"]);
+		.range(["#ffff00", "#ff8800", "#ff0000"]);
 
 var xAxis = d3.axisBottom(x0);
 
