@@ -6,7 +6,7 @@ This is a tutorial on how to create a stacked and grouped bar chart using D3. Th
 - A webserver (Apache / Xampp / Python / etc.)
 - [Dataset](https://data.gov.sg/dataset/teachers-in-schools-academic-qualifications-and-length-of-service?resource_id=d1197eaf-4a73-4a7e-a7b9-e2fa6b6b41e5)
 
-Example result: [D3 - Teachers by Age in schools in Singapore](https://soulifyx.github.io/Teachers%20by%20Age%20in%20Singapore/groupedStackedBarChart.html)
+### Example result: [D3 - Teachers by Age in schools in Singapore](https://soulifyx.github.io/Teachers%20by%20Age%20in%20Singapore/groupedStackedBarChart.html)
 
 
 ## HTML
